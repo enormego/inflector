@@ -74,7 +74,7 @@ static CWInflector* _sharedInstance = nil;
 	if([uncountables containsObject:[singular lowercaseString]])
 		return singular;
 	
-	for(NSArray* conversion in plurals) {
+	for(NSArray* conversion in [plurals reverseObjectEnumerator]) {
 		NSString* result = [singular stringByReplacingOccurrencesOfRegex:[conversion objectAtIndex:0] withString:[conversion objectAtIndex:1]];
 		if(result && ![result isEqualToString:singular])
 			return result;
@@ -86,7 +86,7 @@ static CWInflector* _sharedInstance = nil;
 	if([uncountables containsObject:[plural lowercaseString]])
 		return plural;
 	
-	for(NSArray* conversion in singulars) {
+	for(NSArray* conversion in [singulars reverseObjectEnumerator]) {
 		NSString* result = [plural stringByReplacingOccurrencesOfRegex:[conversion objectAtIndex:0] withString:[conversion objectAtIndex:1]];
 		if(result && ![result isEqualToString:plural])
 			return result;
